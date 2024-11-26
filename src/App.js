@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import PropertySearchForm from './PropertySearchForm';
+import propertiesData from './properties.json';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    const [filteredProperties, setFilteredProperties] = useState(propertiesData);
 
+    const handleSearch = (searchCriteria) => {
+        const { postcode, propertyType, minPrice, maxPrice, startDate, endDate } = searchCriteria;
+
+        let filtered = propertiesData.filter((property) => {
+            const matchesPostcode = postcode ? property.postcode.includes(postcode) : true;
+            const matchesType = propertyType !== 'any' ? property.type === propertyType : true;
+            const matchesMinPrice = minPrice ? property.price >= minPrice : true;
+            const matchesMaxPrice = maxPrice ? property.price <= maxPrice : true;
+            return matchesPostcode && matchesType && matchesMinPrice && matchesMaxPrice;
+        });
+
+        setFilteredProperties(filtered);
+    };
+
+    return (
+        <div>
+            <h1>Estate Agent Web Application</h1>
+            <PropertySearchForm onSearch={handleSearch} />
+
+            <h2>Properties</h2>
+            <ul>
+                {filteredProperties.map((property) => (
+                    <li key={property.id}>
+                        {property.name} - {property.type} - {property.price} - {property.postcode}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
 export default App;
