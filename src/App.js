@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import PropertySearchForm from './PropertySearchForm';
-import propertiesData from './public/properties.json';
+import propertiesData from './properties.json';
 
 function App() {
     const [filteredProperties, setFilteredProperties] = useState(Array.isArray(propertiesData) ? propertiesData : []);
 
-    const handleSearch = (searchCriteria) => {
+    const handleSearch = ({searchCriteria}) => {
         const { postcode, propertyType, minPrice, maxPrice, startDate, endDate } = searchCriteria;
 
         let filtered = propertiesData.filter((property) => {
@@ -29,7 +29,7 @@ function App() {
                     <li key={property.id}>
                         {property.name} - {property.type} - {property.price} - {property.postcode}
                     </li>
-                ))};
+                ))}
             </ul>
         </div>
     );
