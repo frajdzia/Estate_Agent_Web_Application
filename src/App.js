@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropertySearchForm from './PropertySearchForm';
-import propertiesData from './properties.json';
+import propertiesData from './public/properties.json';
 
 function App() {
-    const [filteredProperties, setFilteredProperties] = useState(propertiesData);
+    const [filteredProperties, setFilteredProperties] = useState(Array.isArray(propertiesData) ? propertiesData : []);
 
     const handleSearch = (searchCriteria) => {
         const { postcode, propertyType, minPrice, maxPrice, startDate, endDate } = searchCriteria;
@@ -15,7 +15,6 @@ function App() {
             const matchesMaxPrice = maxPrice ? property.price <= maxPrice : true;
             return matchesPostcode && matchesType && matchesMinPrice && matchesMaxPrice;
         });
-
         setFilteredProperties(filtered);
     };
 
@@ -30,9 +29,9 @@ function App() {
                     <li key={property.id}>
                         {property.name} - {property.type} - {property.price} - {property.postcode}
                     </li>
-                ))}
+                ))};
             </ul>
         </div>
     );
-}
+};
 export default App;

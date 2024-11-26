@@ -94,6 +94,6 @@ function PropertySearchForm({ onSearch }) {
             <button type="submit">Search</button>
         </form>
     );
-}
+};
 
 export default PropertySearchForm;
