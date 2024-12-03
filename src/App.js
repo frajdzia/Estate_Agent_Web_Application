@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PropertySearchForm from './PropertySearchForm';
-import Cart from "./components/Cart.js";
 import PropertyList from "./components/PropertyList.js";
 import FavouriteList from "./components/FavouriteList.js";
 import SearchBar from "./components/SearchBar.js";
@@ -90,7 +89,6 @@ const App = () => {
             <div className="main-container">
                 <div className="left-section">
                     <h2>Properties</h2>
-                    <FavouriteList favourites={favourites} handleClearFavourites={handleClearFavourites} />
                     <PropertyList
                         properties={filteredProperties}
                         handleAddToFavourites={handleAddToFavourites}
@@ -101,7 +99,11 @@ const App = () => {
                 ) : null} 
                 </div>
                 <div className="right-section">
-                    <Cart cartItems={cartItems} setCartItems={setCartItems} />
+                <FavouriteList 
+                    favourites={favourites} 
+                    handleClearFavourites={handleClearFavourites} 
+                    setFavourites={setFavourites}
+                />
                 </div>
             </div>
         </div>
