@@ -1,37 +1,111 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropertySearchForm from './PropertySearchForm';
-import propertiesData from './properties.json';
+import Cart from "./components/Cart.js";
+import PropertyList from "./components/PropertyList.js";
+import FavouriteList from "./components/FavouriteList.js";
+import SearchBar from "./components/SearchBar.js";
 
-function App() {
-    const [filteredProperties, setFilteredProperties] = useState(Array.isArray(propertiesData) ? propertiesData : []);
+const App = () => {
+    const [properties, setProperties] = useState([]);
+    const [filteredProperties, setFilteredProperties] = useState([]);
+    const [favourites, setFavourites] = useState([]);
+    const [cartItems, setCartItems] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filters, setFilters] = useState({
+        postcode: '',
+        propertyType: 'any',
+        minPrice: null,
+        maxPrice: null
+    });
 
-    const handleSearch = ({searchCriteria}) => {
-        const { postcode, propertyType, minPrice, maxPrice, startDate, endDate } = searchCriteria;
+    useEffect(() => {
+        // Fetch data from properties.json
+        fetch('./properties.json')
+            .then((response) => response.json())
+            .then((data) => {
+                setProperties(data.properties);
+                setFilteredProperties(data.properties);
+            })
+            .catch((error) => console.error('Error fetching data: ', error));
+    }, []);
 
-        let filtered = propertiesData.filter((property) => {
-            const matchesPostcode = postcode ? property.postcode.includes(postcode) : true;
-            const matchesType = propertyType !== 'any' ? property.type === propertyType : true;
-            const matchesMinPrice = minPrice ? property.price >= minPrice : true;
-            const matchesMaxPrice = maxPrice ? property.price <= maxPrice : true;
-            return matchesPostcode && matchesType && matchesMinPrice && matchesMaxPrice;
-        });
-        setFilteredProperties(filtered);
+    const handleSearch = (searchCriteria) => {
+        setFilters(searchCriteria);
     };
 
-    return (
-        <div>
-            <h1>Estate Agent Web Application</h1>
-            <PropertySearchForm onSearch={handleSearch} />
+    const handleSearchBar = (term) => {
+        setSearchTerm(term);
+    };
 
-            <h2>Properties</h2>
-            <ul>
-                {filteredProperties.map((property) => (
-                    <li key={property.id}>
-                        {property.name} - {property.type} - {property.price} - {property.postcode}
-                    </li>
-                ))}
-            </ul>
+    const getFilteredProperties = () => {
+        return properties.filter((property) => {
+            const matchesSearchTerm = property.id.toLowerCase().includes(searchTerm.toLowerCase());
+
+            const matchesPostcode = filters.postcode ? property.postcode.includes(filters.postcode) : true;
+            const matchesType = filters.propertyType !== 'any' ? property.type === filters.propertyType : true;
+            const matchesMinPrice = filters.minPrice ? property.price >= filters.minPrice : true;
+            const matchesMaxPrice = filters.maxPrice ? property.price <= filters.maxPrice : true;
+
+            return matchesSearchTerm && matchesPostcode && matchesType && matchesMinPrice && matchesMaxPrice;
+        });
+    };
+
+    useEffect(() => {
+        setFilteredProperties(getFilteredProperties());
+    }, [searchTerm, filters, properties]);
+
+    const handleAddToFavourites = (property) => {
+        if (!favourites.some((favourite) => favourite.id === property.id)) {
+            setFavourites([...favourites, property]);
+        }
+    };
+
+    useEffect(() => {
+        // Save favourites to localStorage
+        localStorage.setItem('favourites', JSON.stringify(favourites));
+    }, [favourites]);
+
+    const handleClearFavourites = () => {
+        setFavourites([]);
+        localStorage.removeItem('favourites'); // Clear local storage
+    };
+
+    useEffect(() => {
+        // Load favourites from localStorage
+        const savedFavourites = localStorage.getItem('favourites');
+        if (savedFavourites) {
+            setFavourites(JSON.parse(savedFavourites));
+        }
+    }, []);
+
+    return (
+        <div className="app">
+            <h1>Estate Agent Web Application</h1>
+            <div>
+                <SearchBar handleSearchBar={handleSearchBar} />
+            </div>
+            <div>
+                <PropertySearchForm onSearch={handleSearch} />
+            </div>
+            <div className="main-container">
+                <div className="left-section">
+                    <h2>Properties</h2>
+                    <FavouriteList favourites={favourites} handleClearFavourites={handleClearFavourites} />
+                    <PropertyList
+                        properties={filteredProperties}
+                        handleAddToFavourites={handleAddToFavourites}
+                        favourites={favourites}
+                    />
+                {filteredProperties.length === 0 ? (
+                    <p>No properties available</p>
+                ) : null} 
+                </div>
+                <div className="right-section">
+                    <Cart cartItems={cartItems} setCartItems={setCartItems} />
+                </div>
+            </div>
         </div>
     );
 };
+
 export default App;
