@@ -59,6 +59,10 @@ const App = () => {
         }
     };
 
+    const handleRemoveFromFavourites = (property) => {
+        setFavourites(favourites.filter((favourite) => favourite.id !== property.id));
+    };    
+
     useEffect(() => {
         // Save favourites to localStorage
         localStorage.setItem('favourites', JSON.stringify(favourites));
@@ -92,6 +96,7 @@ const App = () => {
                     <PropertyList
                         properties={filteredProperties}
                         handleAddToFavourites={handleAddToFavourites}
+                        handleRemoveFromFavourites={handleRemoveFromFavourites}
                         favourites={favourites}
                     />
                 {filteredProperties.length === 0 ? (

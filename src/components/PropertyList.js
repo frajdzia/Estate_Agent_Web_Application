@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from './Card';
 
-const PropertyList = ({properties, handleAddToFavourites, favourites}) => {
+const PropertyList = ({properties, handleAddToFavourites, handleRemoveFromFavourites, favourites}) => {
     
     const handleDragStart = (e, property) => {
         e.dataTransfer.setData('property', JSON.stringify(property));
@@ -18,8 +18,16 @@ const PropertyList = ({properties, handleAddToFavourites, favourites}) => {
                         <div draggable onDragStart={(e) => handleDragStart(e, property)} className = "drag-handle">
                         <Card property={property} />
                         </div>
-                        <button onClick ={()=> handleAddToFavourites(property)} disabled={isFavourite}>
-                        {isFavourite ? "Already in Favs" : "Add to Favs"}
+                        <button
+                            onClick={() => {
+                                if (isFavourite) {
+                                handleRemoveFromFavourites(property); // Remove from favorites if it's already there
+                                } else {
+                                handleAddToFavourites(property); // Add to favorites if it's not there
+                                }
+                            }}
+                            >
+                            {isFavourite ? "Remove from favorite" : "Add to favorite"}
                         </button>
                     </div>
                 );

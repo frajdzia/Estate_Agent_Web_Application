@@ -34,7 +34,7 @@ const FavouriteList = ({ favourites, handleClearFavourites, setFavourites }) => 
                         <Card key={property.id} property={property} />
                     ))
                 ) : (
-                    <p>No favourite properties added yet.</p>
+                    <p>No favorite properties added yet.</p>
                 )}
             </div>
             <hr />
