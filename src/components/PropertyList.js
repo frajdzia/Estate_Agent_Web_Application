@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from './Card';
 
-const PropertyList = ({properties, handleAddToFavourites, handleRemoveFromFavourites, favourites}) => {
+const PropertyList = ({properties, handleAddToFavourites, handleRemoveFromFavourites, favourites, handlePropertyClick}) => {
     
     const handleDragStart = (e, property) => {
         e.dataTransfer.setData('property', JSON.stringify(property));
@@ -16,7 +16,9 @@ const PropertyList = ({properties, handleAddToFavourites, handleRemoveFromFavour
                 return(
                     <div key={property.id} className='property-item'>
                         <div draggable onDragStart={(e) => handleDragStart(e, property)} className = "drag-handle">
-                        <Card property={property} />
+                        <Card property={property}
+                        handlePropertyClick={handlePropertyClick}  // Pass the function here
+                         />
                         </div>
                         <button
                             onClick={() => {

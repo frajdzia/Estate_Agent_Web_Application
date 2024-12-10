@@ -33,18 +33,18 @@ function PropertySearchForm({ onSearch }) {
                     <input 
                         type="radio" 
                         name="property-type" 
-                        value="house" 
-                        checked={propertyType === 'house'}
-                        onChange={() => setPropertyType('house')} 
+                        value="House" 
+                        checked={propertyType === 'House'}
+                        onChange={() => setPropertyType('House')} 
                     /> House
                 </label>
                 <label>
                     <input 
                         type="radio" 
                         name="property-type" 
-                        value="flat" 
-                        checked={propertyType === 'flat'}
-                        onChange={() => setPropertyType('flat')} 
+                        value="Flat" 
+                        checked={propertyType === 'Flat'}
+                        onChange={() => setPropertyType('Flat')} 
                     /> Flat
                 </label>
                 <label>

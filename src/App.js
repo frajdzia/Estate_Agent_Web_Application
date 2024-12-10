@@ -3,18 +3,21 @@ import PropertySearchForm from './PropertySearchForm';
 import PropertyList from "./components/PropertyList.js";
 import FavouriteList from "./components/FavouriteList.js";
 import SearchBar from "./components/SearchBar.js";
+import Modal from './components/Modal';
 
 const App = () => {
     const [properties, setProperties] = useState([]);
     const [filteredProperties, setFilteredProperties] = useState([]);
     const [favourites, setFavourites] = useState([]);
-    const [cartItems, setCartItems] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedProperty, setSelectedProperty] = useState(null); 
     const [filters, setFilters] = useState({
         postcode: '',
         propertyType: 'any',
         minPrice: null,
-        maxPrice: null
+        maxPrice: null,
+        startDate: '',
+        endDate: ''
     });
 
     useEffect(() => {
@@ -36,16 +39,24 @@ const App = () => {
         setSearchTerm(term);
     };
 
+    // Filter the properties based on search
     const getFilteredProperties = () => {
         return properties.filter((property) => {
             const matchesSearchTerm = property.id.toLowerCase().includes(searchTerm.toLowerCase());
 
-            const matchesPostcode = filters.postcode ? property.postcode.includes(filters.postcode) : true;
+            // const matchesPostcode = filters.postcode ? property.location.includes(filters.postcode) : true;
+
+            const postcodeFromAddress = property.location.slice(-3).toLowerCase(); // get last 3 characters of location in lowercase
+            const matchesPostcode = filters.postcode ? postcodeFromAddress.includes(filters.postcode.toLowerCase()) : true;
+            
+
             const matchesType = filters.propertyType !== 'any' ? property.type === filters.propertyType : true;
             const matchesMinPrice = filters.minPrice ? property.price >= filters.minPrice : true;
             const matchesMaxPrice = filters.maxPrice ? property.price <= filters.maxPrice : true;
+            const matchesStartDate = filters.startDate ? new Date(property.added.year, property.added.month - 1, property.added.day) >= new Date(filters.startDate) : true;
+            const matchesEndDate = filters.endDate ? new Date(property.added.year, property.added.month - 1, property.added.day) <= new Date(filters.endDate) : true;
 
-            return matchesSearchTerm && matchesPostcode && matchesType && matchesMinPrice && matchesMaxPrice;
+            return matchesSearchTerm && matchesPostcode && matchesType && matchesMinPrice && matchesMaxPrice && matchesStartDate && matchesEndDate;
         });
     };
 
@@ -64,7 +75,7 @@ const App = () => {
     };    
 
     useEffect(() => {
-        // Save favourites to localStorage
+        // Save favourites to local storage
         localStorage.setItem('favourites', JSON.stringify(favourites));
     }, [favourites]);
 
@@ -74,12 +85,22 @@ const App = () => {
     };
 
     useEffect(() => {
-        // Load favourites from localStorage
+        // Load favourites from local storage
         const savedFavourites = localStorage.getItem('favourites');
         if (savedFavourites) {
             setFavourites(JSON.parse(savedFavourites));
         }
     }, []);
+
+    // open the modal with a selected property
+    const handlePropertyClick = (property) => {
+        setSelectedProperty(property);
+    };
+
+    // close the modal
+    const handleCloseModal = () => {
+        setSelectedProperty(null);
+    };
 
     return (
         <div className="app">
@@ -98,19 +119,28 @@ const App = () => {
                         handleAddToFavourites={handleAddToFavourites}
                         handleRemoveFromFavourites={handleRemoveFromFavourites}
                         favourites={favourites}
+                        handlePropertyClick={handlePropertyClick}  // property click handler
                     />
-                {filteredProperties.length === 0 ? (
-                    <p>No properties available</p>
-                ) : null} 
+                    {filteredProperties.length === 0 ? (
+                        <p>No properties available</p>
+                    ) : null}
                 </div>
                 <div className="right-section">
-                <FavouriteList 
-                    favourites={favourites} 
-                    handleClearFavourites={handleClearFavourites} 
-                    setFavourites={setFavourites}
-                />
+                    <FavouriteList 
+                        favourites={favourites} 
+                        handleClearFavourites={handleClearFavourites} 
+                        setFavourites={setFavourites}
+                    />
                 </div>
             </div>
+            
+            {/* Modal for detailed property view */}
+            {selectedProperty && (
+                <Modal 
+                    property={selectedProperty} 
+                    handleCloseModal={handleCloseModal} 
+                />
+            )}
         </div>
     );
 };
