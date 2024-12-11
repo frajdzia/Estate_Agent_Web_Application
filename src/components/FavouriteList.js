@@ -9,7 +9,6 @@ const FavouriteList = ({ favourites, handleClearFavourites, setFavourites }) => 
         const updatedFavourites = [...favourites];
         const index = updatedFavourites.findIndex(item => item.id === property.id);
         
-        
         if (index !== -1) {
             updatedFavourites.splice(index, 1);
         } else {
