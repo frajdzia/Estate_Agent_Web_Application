@@ -1,4 +1,3 @@
-/* public/style.css */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,7 +5,7 @@ body {
 }
 
 h1 {
-    color: #333;
+    color: #02544d;
 }
 
 form {
@@ -106,7 +105,6 @@ button {
     margin-top: 10px;
   }
   
-  
   /* Mobile-specific styles */
 
   @media (max-width: 768px) {
@@ -144,55 +142,6 @@ button {
 
   /* MODAL.js */
 
-  /* Modal overlay */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-/* Modal content */
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  width: 80%;
-  max-width: 800px;
-  border-radius: 10px;
-  overflow-y: auto;
-}
-
-/* Close button */
-.close-btn {
-  background: red;
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.additional-images img {
-  width: 100%;
-  max-width: 100px;
-  margin: 10px;
-}
-
-.property-image {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-}
-
-
 /* -------------- */
 .modal-overlay {
   position: fixed;
@@ -204,15 +153,18 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .modal-content {
   background-color: white;
   padding: 20px;
   position: relative;
+  width: 80%;
   max-width: 800px;
   max-height: 90vh;
   overflow: auto;
+  border-radius: 10px;
 }
 
 .close-btn {
@@ -220,7 +172,7 @@ button {
   top: 10px;
   right: 10px;
   padding: 5px 10px;
-  background-color: #333;
+  background-color: #650000;
   color: white;
   border: none;
   cursor: pointer;
@@ -272,4 +224,11 @@ button {
   object-fit: cover;
   cursor: pointer;
   margin-right: 10px;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.additional-image.selected { /* selected thumbnail */
+  opacity: 1; 
+  border: 2px solid #00ff4c;
 }

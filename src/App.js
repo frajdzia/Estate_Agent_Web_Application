@@ -48,7 +48,6 @@ const App = () => {
 
             const postcodeFromAddress = property.location.slice(-3).toLowerCase(); // get last 3 characters of location in lowercase
             const matchesPostcode = filters.postcode ? postcodeFromAddress.includes(filters.postcode.toLowerCase()) : true;
-            
 
             const matchesType = filters.propertyType !== 'any' ? property.type === filters.propertyType : true;
             const matchesMinPrice = filters.minPrice ? property.price >= filters.minPrice : true;
@@ -104,7 +103,8 @@ const App = () => {
 
     return (
         <div className="app">
-            <h1>Estate Agent Web Application</h1>
+            {/* <h1>Estate Agent Web Application</h1> */}
+            <h1>NestHub</h1>
             <div>
                 <SearchBar handleSearchBar={handleSearchBar} />
             </div>
@@ -134,7 +134,7 @@ const App = () => {
                 </div>
             </div>
             
-            {/* Modal for detailed property view */}
+            {/* details of property */}
             {selectedProperty && (
                 <Modal 
                     property={selectedProperty} 
