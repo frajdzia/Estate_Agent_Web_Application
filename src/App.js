@@ -103,10 +103,13 @@ const App = () => {
 
     return (
         <div className="app">
-            {/* <h1>Estate Agent Web Application</h1> */}
-            <h1>NestHub</h1>
-            <div>
-                <SearchBar handleSearchBar={handleSearchBar} />
+            <div className="nav">
+                <div className="navbar">
+                    <h1>NestHub</h1>
+                </div>
+                <div className="searchbar">
+                    <SearchBar handleSearchBar={handleSearchBar} />
+                </div>
             </div>
             <div>
                 <PropertySearchForm onSearch={handleSearch} />

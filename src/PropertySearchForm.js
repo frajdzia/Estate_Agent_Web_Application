@@ -18,7 +18,7 @@ function PropertySearchForm({ onSearch }) {
             <h3>Find Property By:</h3>
             
             <fieldset>
-                <legend>Postcode:</legend>
+                <div>Postcode:</div>
                 <input 
                     type="text" 
                     placeholder="Enter the postcode" 
@@ -28,7 +28,7 @@ function PropertySearchForm({ onSearch }) {
             </fieldset>
 
             <fieldset>
-                <legend>Type of Property:</legend>
+                <div>Type of Property:</div>
                 <label>
                     <input 
                         type="radio" 
@@ -59,7 +59,7 @@ function PropertySearchForm({ onSearch }) {
             </fieldset>
 
             <fieldset>
-                <legend>Price Range:</legend>
+                <div>Price Range:</div>
                 <input 
                     type="number" 
                     placeholder="Min Price" 
@@ -75,15 +75,12 @@ function PropertySearchForm({ onSearch }) {
             </fieldset>
 
             <fieldset>
-                <legend>Date Range:</legend>
-                <label>After:</label>
+                <div>Date Range:</div>
                 <input 
                     type="date" 
                     value={startDate} 
                     onChange={(e) => setStartDate(e.target.value)} 
-                />
-                <br />
-                <label>Before:</label>
+                />&nbsp; to &nbsp;
                 <input 
                     type="date" 
                     value={endDate} 
