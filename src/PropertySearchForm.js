@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import DatePicker from "react-widgets/DatePicker";
+import NumberPicker from "react-widgets/NumberPicker";
+import DropdownList from "react-widgets/DropdownList";
+
 
 function PropertySearchForm({ onSearch }) {
     const [postcode, setPostcode] = useState('');
-    const [propertyType, setPropertyType] = useState('any');
-    const [minPrice, setMinPrice] = useState('');
-    const [maxPrice, setMaxPrice] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
+    const [propertyType, setPropertyType] = useState('Any');
+    const [minPrice, setMinPrice] = useState();
+    const [maxPrice, setMaxPrice] = useState();
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -14,14 +18,14 @@ function PropertySearchForm({ onSearch }) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} >
             <h3>Find Property By:</h3>
-            
+            <div className="form-inputs-container">
             <fieldset>
                 <div>Postcode:</div>
                 <input 
                     type="text" 
-                    placeholder="Enter the postcode" 
+                    placeholder="Enter the postcode"
                     value={postcode} 
                     onChange={(e) => setPostcode(e.target.value)} 
                 />
@@ -29,65 +33,45 @@ function PropertySearchForm({ onSearch }) {
 
             <fieldset>
                 <div>Type of Property:</div>
-                <label>
-                    <input 
-                        type="radio" 
-                        name="property-type" 
-                        value="House" 
-                        checked={propertyType === 'House'}
-                        onChange={() => setPropertyType('House')} 
-                    /> House
-                </label>
-                <label>
-                    <input 
-                        type="radio" 
-                        name="property-type" 
-                        value="Flat" 
-                        checked={propertyType === 'Flat'}
-                        onChange={() => setPropertyType('Flat')} 
-                    /> Flat
-                </label>
-                <label>
-                    <input 
-                        type="radio" 
-                        name="property-type" 
-                        value="any" 
-                        checked={propertyType === 'any'}
-                        onChange={() => setPropertyType('any')} 
-                    /> Any
-                </label>
+                    <DropdownList
+                        defaultValue="Any"
+                        data={["House", "Flat", "Any"]}
+                        value={propertyType}
+                        onChange={(e) => setPropertyType(e === "Any" ? '' : e)} 
+                    />
+
             </fieldset>
 
             <fieldset>
                 <div>Price Range:</div>
-                <input 
-                    type="number" 
+                <NumberPicker 
                     placeholder="Min Price" 
                     value={minPrice} 
-                    onChange={(e) => setMinPrice(e.target.value)} 
+                    format={{style: "currency", currency: "GBP"}}
+                    onChange={(e) => setMinPrice(e)} 
                 />
-                <input 
-                    type="number" 
+                <NumberPicker
                     placeholder="Max Price" 
                     value={maxPrice} 
-                    onChange={(e) => setMaxPrice(e.target.value)} 
+                    format={{style: "currency", currency: "GBP"}}
+                    onChange={(e) => setMaxPrice(e)} 
                 />
             </fieldset>
 
             <fieldset>
                 <div>Date Range:</div>
-                <input 
-                    type="date" 
+                <DatePicker 
+                    placeholder="From"
                     value={startDate} 
-                    onChange={(e) => setStartDate(e.target.value)} 
-                />&nbsp; to &nbsp;
-                <input 
-                    type="date" 
+                    onChange={(e) => setStartDate(e)} 
+                />
+                <DatePicker 
+                    placeholder="To"
                     value={endDate} 
-                    onChange={(e) => setEndDate(e.target.value)} 
+                    onChange={(e) => setEndDate(e)} 
                 />
             </fieldset>
-
+</div>
             <button type="submit">Search</button>
         </form>
     );

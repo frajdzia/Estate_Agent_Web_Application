@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import PropertySearchForm from './PropertySearchForm';
 import PropertyList from "./components/PropertyList.js";
-import FavouriteList from "./components/FavouriteList.js";
+import FavoriteList from "./components/FavoriteList.js";
 import SearchBar from "./components/SearchBar.js";
 import Modal from './components/Modal';
 
 const App = () => {
     const [properties, setProperties] = useState([]);
     const [filteredProperties, setFilteredProperties] = useState([]);
-    const [favourites, setFavourites] = useState([]);
+    const [favorites, setFavorites] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedProperty, setSelectedProperty] = useState(null); 
     const [filters, setFilters] = useState({
         postcode: '',
-        propertyType: 'any',
+        propertyType: 'Any',
         minPrice: null,
         maxPrice: null,
-        startDate: '',
-        endDate: ''
+        startDate: null,
+        endDate: null
     });
 
     useEffect(() => {
@@ -29,6 +29,16 @@ const App = () => {
                 setFilteredProperties(data.properties);
             })
             .catch((error) => console.error('Error fetching data: ', error));
+
+            
+        // Load favorites from local storage
+        const savedFavorites = localStorage.getItem('favorites');
+        if (savedFavorites) {
+            setFavorites(JSON.parse(savedFavorites));
+        }
+
+        
+        setFilteredProperties(getFilteredProperties());
     }, []);
 
     const handleSearch = (searchCriteria) => {
@@ -49,7 +59,7 @@ const App = () => {
             const postcodeFromAddress = property.location.slice(-3).toLowerCase(); // get last 3 characters of location in lowercase
             const matchesPostcode = filters.postcode ? postcodeFromAddress.includes(filters.postcode.toLowerCase()) : true;
 
-            const matchesType = filters.propertyType !== 'any' ? property.type === filters.propertyType : true;
+            const matchesType = filters.propertyType !== 'Any' ? property.type === filters.propertyType : true;
             const matchesMinPrice = filters.minPrice ? property.price >= filters.minPrice : true;
             const matchesMaxPrice = filters.maxPrice ? property.price <= filters.maxPrice : true;
             const matchesStartDate = filters.startDate ? new Date(property.added.year, property.added.month - 1, property.added.day) >= new Date(filters.startDate) : true;
@@ -63,33 +73,25 @@ const App = () => {
         setFilteredProperties(getFilteredProperties());
     }, [searchTerm, filters, properties]);
 
-    const handleAddToFavourites = (property) => {
-        if (!favourites.some((favourite) => favourite.id === property.id)) {
-            setFavourites([...favourites, property]);
+    const handleAddToFavorites = (property) => {
+        if (!favorites.some((favorite) => favorite.id === property.id)) {
+            setFavorites([...favorites, property]);
         }
     };
 
-    const handleRemoveFromFavourites = (property) => {
-        setFavourites(favourites.filter((favourite) => favourite.id !== property.id));
+    const handleRemoveFromFavorites = (property) => {
+        setFavorites(favorites.filter((favorite) => favorite.id !== property.id));
     };    
 
     useEffect(() => {
-        // Save favourites to local storage
-        localStorage.setItem('favourites', JSON.stringify(favourites));
-    }, [favourites]);
+        // Save favorites to local storage
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+    }, [favorites]);
 
-    const handleClearFavourites = () => {
-        setFavourites([]);
-        localStorage.removeItem('favourites'); // Clear local storage
+    const handleClearFavorites = () => {
+        setFavorites([]);
+        localStorage.removeItem('favorites'); // Clear local storage
     };
-
-    useEffect(() => {
-        // Load favourites from local storage
-        const savedFavourites = localStorage.getItem('favourites');
-        if (savedFavourites) {
-            setFavourites(JSON.parse(savedFavourites));
-        }
-    }, []);
 
     // open the modal with a selected property
     const handlePropertyClick = (property) => {
@@ -99,6 +101,15 @@ const App = () => {
     // close the modal
     const handleCloseModal = () => {
         setSelectedProperty(null);
+    };
+
+    const handleFavoriteDrop = (e) => {
+        const favorite = JSON.parse(e.dataTransfer.getData('favorite')); 
+        setFavorites(favorites.filter(f => f.id !== favorite.id));
+    };
+    
+    const handleFavoriteDragOver = (e) => {
+        e.preventDefault();
     };
 
     return (
@@ -115,13 +126,13 @@ const App = () => {
                 <PropertySearchForm onSearch={handleSearch} />
             </div>
             <div className="main-container">
-                <div className="left-section">
+                <div className="left-section" onDrop={handleFavoriteDrop} onDragOver={handleFavoriteDragOver}>
                     <h2>Properties</h2>
                     <PropertyList
                         properties={filteredProperties}
-                        handleAddToFavourites={handleAddToFavourites}
-                        handleRemoveFromFavourites={handleRemoveFromFavourites}
-                        favourites={favourites}
+                        handleAddToFavorites={handleAddToFavorites}
+                        handleRemoveFromFavorites={handleRemoveFromFavorites}
+                        favorites={favorites}
                         handlePropertyClick={handlePropertyClick}  // property click handler
                     />
                     {filteredProperties.length === 0 ? (
@@ -129,10 +140,10 @@ const App = () => {
                     ) : null}
                 </div>
                 <div className="right-section">
-                    <FavouriteList 
-                        favourites={favourites} 
-                        handleClearFavourites={handleClearFavourites} 
-                        setFavourites={setFavourites}
+                    <FavoriteList 
+                        favorites={favorites} 
+                        handleClearFavorites={handleClearFavorites} 
+                        setFavorites={setFavorites}
                     />
                 </div>
             </div>

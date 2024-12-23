@@ -28,6 +28,18 @@ select {
     width: 200px;
 }
 
+
+input[type="text"] {
+  width: 250px;
+  line-height: 30px;
+  padding-left: 10px;
+  font-size: 14px;
+  padding-right: 10px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid #ccc;
+}
+
 button {
     padding: 10px;
     background-color: #4CAF50;
@@ -82,7 +94,8 @@ button {
   }
   
   .left-section {
-    width: 65%;
+    width: fit-content;
+    padding-right: 30px;
   }
   
   .right-section {
@@ -90,11 +103,31 @@ button {
     padding-left: 20px;
     border-left: 1px solid #ddd;
   }
+
+  .form-inputs-container{
+    max-width: 300px; 
+  }
   
+.favorite-list{
+  height:100%;
+}
+
   .card-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
+  }
+
+  .card-container-favorites {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+
+  }
+
+  .card-container-right .card {
+    padding: 25px;
   }
   
   .card {
@@ -145,11 +178,6 @@ button {
       width: 100%; 
       margin: 10px 0;
     }
-  
-    .favorite-list,
-    .property-list {
-      margin-bottom: 20px;
-    }
   }
 
 
@@ -178,6 +206,10 @@ button {
   max-height: 90vh;
   overflow: auto;
   border-radius: 10px;
+}
+
+#modal-header{
+  text-align: center;
 }
 
 .close-btn {

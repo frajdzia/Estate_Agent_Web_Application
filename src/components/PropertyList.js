@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from './Card';
 
-const PropertyList = ({properties, handleAddToFavourites, handleRemoveFromFavourites, favourites, handlePropertyClick}) => {
+const PropertyList = ({properties, handleAddToFavorites, handleRemoveFromFavorites, favorites, handlePropertyClick}) => {
     
     const handleDragStart = (e, property) => {
         e.dataTransfer.setData('property', JSON.stringify(property));
@@ -9,10 +9,9 @@ const PropertyList = ({properties, handleAddToFavourites, handleRemoveFromFavour
     
     return(
         <>
-        <h2>property List</h2>
         <div className='card-container'>
             {properties.map((property)=>{
-                const isFavourite = favourites.some((favourite) => favourite.id === property.id);
+                const isFavorite = favorites.some((favorite) => favorite.id === property.id);
                 return(
                     <div key={property.id} className='property-item'>
                         <div draggable onDragStart={(e) => handleDragStart(e, property)} className = "drag-handle">
@@ -22,14 +21,14 @@ const PropertyList = ({properties, handleAddToFavourites, handleRemoveFromFavour
                         </div>
                         <button
                             onClick={() => {
-                                if (isFavourite) {
-                                handleRemoveFromFavourites(property); // Remove from favorites if it's already there
+                                if (isFavorite) {
+                                handleRemoveFromFavorites(property); // Remove from favorites if it's already there
                                 } else {
-                                handleAddToFavourites(property); // Add to favorites if it's not there
+                                handleAddToFavorites(property); // Add to favorites if it's not there
                                 }
                             }}
                             >
-                            {isFavourite ? "Remove from favorite" : "Add to favorite"}
+                            {isFavorite ? "Remove from favorite" : "Add to favorite"}
                         </button>
                     </div>
                 );

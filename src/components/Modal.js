@@ -38,7 +38,7 @@ const Modal = ({ property, handleCloseModal }) => {
         <div className="modal-overlay" onClick={handleCloseModal}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <button className="close-btn" onClick={handleCloseModal}>Close</button>
-                <h2>{property.id}</h2>
+                <h2 id="modal-header">{property.id}</h2>
 
                 <div>
             {/* Property images slider */}
