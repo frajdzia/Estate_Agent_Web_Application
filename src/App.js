@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import PropertySearchForm from './PropertySearchForm';
+import PropertySearchForm from './components/PropertySearchForm.js';
 import PropertyList from "./components/PropertyList.js";
 import FavoriteList from "./components/FavoriteList.js";
 import SearchBar from "./components/SearchBar.js";
@@ -14,6 +14,8 @@ const App = () => {
     const [filters, setFilters] = useState({
         postcode: '',
         propertyType: 'Any',
+        minBed: null,
+        maxBed: null,
         minPrice: null,
         maxPrice: null,
         startDate: null,
@@ -60,12 +62,14 @@ const App = () => {
             const matchesPostcode = filters.postcode ? postcodeFromAddress.includes(filters.postcode.toLowerCase()) : true;
 
             const matchesType = filters.propertyType !== 'Any' ? property.type === filters.propertyType : true;
+            const matchesMinBed = filters.minBed ? property.bedrooms >=filters.minBed : true;
+            const matchesMaxBed = filters.maxBed ? property.bedrooms <=filters.maxBed : true;
             const matchesMinPrice = filters.minPrice ? property.price >= filters.minPrice : true;
             const matchesMaxPrice = filters.maxPrice ? property.price <= filters.maxPrice : true;
             const matchesStartDate = filters.startDate ? new Date(property.added.year, property.added.month - 1, property.added.day) >= new Date(filters.startDate) : true;
             const matchesEndDate = filters.endDate ? new Date(property.added.year, property.added.month - 1, property.added.day) <= new Date(filters.endDate) : true;
 
-            return matchesSearchTerm && matchesPostcode && matchesType && matchesMinPrice && matchesMaxPrice && matchesStartDate && matchesEndDate;
+            return matchesSearchTerm && matchesPostcode && matchesType && matchesMinBed && matchesMaxBed && matchesMinPrice && matchesMaxPrice && matchesStartDate && matchesEndDate;
         });
     };
 
@@ -144,6 +148,7 @@ const App = () => {
                         favorites={favorites} 
                         handleClearFavorites={handleClearFavorites} 
                         setFavorites={setFavorites}
+                        handlePropertyClick={handlePropertyClick}  // property click handler
                     />
                 </div>
             </div>

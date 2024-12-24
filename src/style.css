@@ -116,6 +116,7 @@ button {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
+    align-items: center;
   }
 
   .card-container-favorites {
@@ -125,10 +126,10 @@ button {
     align-items: center;
 
   }
-
+/* 
   .card-container-right .card {
     padding: 25px;
-  }
+  } */
   
   .card {
     border: 1px solid #ddd;

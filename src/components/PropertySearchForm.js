@@ -3,7 +3,6 @@ import DatePicker from "react-widgets/DatePicker";
 import NumberPicker from "react-widgets/NumberPicker";
 import DropdownList from "react-widgets/DropdownList";
 
-
 function PropertySearchForm({ onSearch }) {
     const [postcode, setPostcode] = useState('');
     const [propertyType, setPropertyType] = useState('Any');
@@ -11,10 +10,12 @@ function PropertySearchForm({ onSearch }) {
     const [maxPrice, setMaxPrice] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
+    const [minBed, setMinBed] = useState();
+    const [maxBed,setMaxBed] = useState();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSearch({ postcode, propertyType, minPrice, maxPrice, startDate, endDate });
+        onSearch({ postcode, propertyType, minBed, maxBed, minPrice, maxPrice, startDate, endDate});
     };
 
     return (
@@ -39,9 +40,20 @@ function PropertySearchForm({ onSearch }) {
                         value={propertyType}
                         onChange={(e) => setPropertyType(e === "Any" ? '' : e)} 
                     />
-
             </fieldset>
-
+            <fieldset>
+                <div>Bedrooms</div>
+                <NumberPicker
+                    placeholder="Min bedrooms"
+                    value={minBed}
+                    onChange={(e) => setMinBed(e)}
+                />
+                <NumberPicker
+                    placeholder="Max bedrooms"
+                    value={maxBed}
+                    onChange={(e) => setMaxBed(e)}
+                />
+            </fieldset>
             <fieldset>
                 <div>Price Range:</div>
                 <NumberPicker 

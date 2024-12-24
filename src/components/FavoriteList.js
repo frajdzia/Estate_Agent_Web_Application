@@ -1,7 +1,7 @@
 import React from "react";
 import Card from './Card';
 
-const FavoriteList = ({ favorites, handleClearFavorites, setFavorites }) => {
+const FavoriteList = ({ favorites, handleClearFavorites, handlePropertyClick, setFavorites }) => {
     // Handle drop event to add or remove properties from favorites when dropped to fav block
     const handleDrop = (e) => {
         e.preventDefault();
@@ -34,7 +34,10 @@ const FavoriteList = ({ favorites, handleClearFavorites, setFavorites }) => {
             <div className = "card-container-right">
                 {favorites.length > 0 ? (
                     favorites.map((favorite) => (<div key={favorite.id} className = "drag-handle" draggable onDragStart={(e) => handleDragStart(e, favorite)}>
-                        <Card  property={favorite} /></div>
+                        <Card property={favorite} 
+                            handlePropertyClick={handlePropertyClick}  // Pass the function here
+                        />
+                        </div>
                     ))
                 ) : (
                     <p>No favorite properties added yet.</p>
