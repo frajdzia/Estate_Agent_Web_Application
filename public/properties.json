@@ -38,11 +38,7 @@
                 "https://media.rightmove.co.uk/66k/65243/155789231/65243_TMH81595_IMG_16_0000.jpeg",
                 "https://media.rightmove.co.uk/66k/65243/155789231/65243_TMH81595_IMG_17_0000.jpeg"
     ],
-            "added": {
-                "month":"September",
-                "day":14,
-                "year":2024
-            }
+            "added": "2024-11-16T00:00:00.000Z"
         },
         {
             "id":"2 bedroom flat penthouse",
@@ -62,11 +58,7 @@
                 "https://media.rightmove.co.uk/201k/200879/151228673/200879_GER246097_IMG_08_0000.jpeg",
                 "https://media.rightmove.co.uk/201k/200879/151228673/200879_GER246097_IMG_10_0000.jpeg"
     ],
-            "added": {
-                "month":"November",
-                "day":27,
-                "year":2024
-            }
+            "added": "2024-11-05T00:00:00.000Z"
         },
         {
             "id":"4 bedroom detached house",
@@ -85,11 +77,7 @@
                 "https://media.rightmove.co.uk/33k/32172/135112643/32172_DIG109876_IMG_06_0001.jpeg",
                 "https://media.rightmove.co.uk/33k/32172/135112643/32172_DIG109876_IMG_07_0001.jpeg"
         ],
-            "added": {
-                "month":"August",
-                "day":18,
-                "year":2024
-            } 
+            "added": "2024-09-02T00:00:00.000Z"
         },
         {
             "id":"3 bedroom penthouse",
@@ -109,11 +97,7 @@
                 "https://media.rightmove.co.uk/277k/276590/150153002/276590_4904TheNewton_IMG_07_0000.jpeg",
                 "https://media.rightmove.co.uk/277k/276590/150153002/276590_4904TheNewton_IMG_08_0000.jpeg"
     ],
-            "added": {
-                "month":"August",
-                "day":18,
-                "year":2024
-            } 
+            "added": "2024-10-23T00:00:00.000Z"
         },
         {
             "id":"5 bedroom terraced house",
@@ -133,11 +117,7 @@
                 "https://media.rightmove.co.uk/49k/48605/147706448/48605_GLS240072_IMG_12_0000.jpeg",
                 "https://media.rightmove.co.uk/49k/48605/147706448/48605_GLS240072_IMG_15_0000.jpeg"
             ],
-            "added": {
-                "month":"August",
-                "day":1,
-                "year":2024
-            } 
+            "added": "2024-10-31T00:00:00.000Z"
         },
         {
             "id":"3 bedroom flat",
@@ -157,10 +137,6 @@
                 "https://media.rightmove.co.uk/92k/91640/155800958/91640_246502_IMG_10_0000.jpeg",
                 "https://media.rightmove.co.uk/92k/91640/155800958/91640_246502_IMG_12_0000.jpeg"
     ],
-            "added": {
-                "month":"August",
-                "day":1,
-                "year":2024
-            } 
+            "added": "2024-11-19T00:00:00.000Z"
         }
 ]}

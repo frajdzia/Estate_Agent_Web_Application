@@ -1,33 +1,31 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
-    color: #02544d;
-    text-align: center;
+  color: #02544d;
+  text-align: center;
 }
 
 form {
-    margin: 20px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
+  margin: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
 }
 
 fieldset {
-    margin: 10px 0;
-    border:none;
+  margin: 10px 0;
+  border: none;
 }
 
 input[type="text"],
 input[type="date"],
 select {
-    padding: 5px;
-    width: 200px;
+  padding: 5px;
 }
-
 
 input[type="text"] {
   width: 250px;
@@ -41,20 +39,20 @@ input[type="text"] {
 }
 
 button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .navbar {
   backdrop-filter: blur(12px);
 }
 
-.navbar h1{
+.navbar h1 {
   margin-top: 0;
-  padding:10px;
+  padding: 10px;
 }
 
 .nav {
@@ -62,129 +60,144 @@ button {
   background-image: url(https://images.squarespace-cdn.com/content/v1/614b8a3ca23b0a1609d011b0/1633600657482-RD46JYBH5UB94DFT8GFI/lofthouseresidences_hero_innovation2.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size: cover;
 }
 
 .searchbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .searchbar input {
-    justify-content: center;
-    padding: 10px;
-    margin:30px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .main-container {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .left-section, .right-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-  
-  .left-section {
-    width: fit-content;
-    padding-right: 30px;
-  }
-  
-  .right-section {
-    width: 25%;
-    padding-left: 20px;
-    border-left: 1px solid #ddd;
-  }
-
-  .form-inputs-container{
-    max-width: 300px; 
-  }
-  
-.favorite-list{
-  height:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-  .card-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 20px;
-    align-items: center;
-  }
+.searchbar input {
+  justify-content: center;
+  padding: 10px;
+  margin: 30px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 
-  .card-container-favorites {
-    display: flex;
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.left-section {
+  width: fit-content;
+  padding-right: 30px;
+}
+
+.right-section {
+  width: 25%;
+  padding-left: 20px;
+  border-left: 1px solid #ddd;
+}
+
+.form-inputs-container {
+  max-width: 300px;
+}
+
+.favorite-list {
+  height: 100%;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: center;
+}
+
+.card-container-favorites {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.card img.property-cover {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.card-body {
+  margin-top: 10px;
+}
+
+.card-mobile-visible {
+  visibility: hidden;
+}
+
+/* Mobile-specific styles */
+
+@media (max-width: 768px) {
+  .main-container {
     flex-direction: column;
-    gap: 10px;
-    align-items: center;
-
+    height: auto;
   }
-/* 
-  .card-container-right .card {
-    padding: 25px;
-  } */
-  
-  .card {
-    border: 1px solid #ddd;
+
+  .left-section,
+  .right-section {
+    width: 100%;
     padding: 10px;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
-    cursor: pointer;
   }
-  
-  .card img.property-cover {
-    width: 100%;  
-    height: 200px;  
-    object-fit: cover; 
-    border-radius: 5px;
+
+  .searchbar-container input {
+    width: 80%;
   }
-  
+}
+
+.right-section {
   .card-body {
-    margin-top: 10px;
-  }
-  
-  /* Mobile-specific styles */
-
-  @media (max-width: 768px) {
-    .main-container {
-      flex-direction: column;
-      height: auto; 
-    }
-  
-    .left-section,
-    .right-section {
-      width: 100%; 
-      padding: 10px;
-    }
-  
-    .searchbar-container input {
-      width: 80%; 
-    }
-  
-    .card-container {
-      grid-template-columns: 1fr; 
-      gap: 10px;
-    }
-  
-    .card {
-      width: 100%; 
-      margin: 10px 0;
-    }
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7); /* background with opacity */
+    color: white;
+    opacity: 0; /* initially hidden property details */
+    transition: opacity 0.3s ease-in-out; /* smooth transition */
   }
 
+  .card {
+    position: relative;
+    padding: 0;
+    border: 1px solid #acacac;
+  }
 
-  /* MODAL.js */
+  .card:hover .card-body,
+  .card-mobile-visible {
+    opacity: 1;
+  }
 
-/* -------------- */
+  .card-larger {
+    opacity: 0;
+  }
+
+  .card-body h3 {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* MODAL styles */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -209,7 +222,7 @@ button {
   border-radius: 10px;
 }
 
-#modal-header{
+#modal-header {
   text-align: center;
 }
 
@@ -275,6 +288,6 @@ button {
 }
 
 .additional-image.selected { /* selected thumbnail */
-  opacity: 1; 
+  opacity: 1;
   border: 2px solid #00ff4c;
 }

@@ -66,8 +66,10 @@ const App = () => {
             const matchesMaxBed = filters.maxBed ? property.bedrooms <=filters.maxBed : true;
             const matchesMinPrice = filters.minPrice ? property.price >= filters.minPrice : true;
             const matchesMaxPrice = filters.maxPrice ? property.price <= filters.maxPrice : true;
-            const matchesStartDate = filters.startDate ? new Date(property.added.year, property.added.month - 1, property.added.day) >= new Date(filters.startDate) : true;
-            const matchesEndDate = filters.endDate ? new Date(property.added.year, property.added.month - 1, property.added.day) <= new Date(filters.endDate) : true;
+
+            const addedDate = new Date(property.added); 
+            const matchesStartDate = filters.startDate ? addedDate >= new Date(filters.startDate) : true;
+            const matchesEndDate = filters.endDate ? addedDate <= new Date(filters.endDate) : true;
 
             return matchesSearchTerm && matchesPostcode && matchesType && matchesMinBed && matchesMaxBed && matchesMinPrice && matchesMaxPrice && matchesStartDate && matchesEndDate;
         });
