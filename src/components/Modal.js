@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 const Modal = ({ property, handleCloseModal }) => {
     // track the current image index
@@ -70,54 +72,31 @@ const Modal = ({ property, handleCloseModal }) => {
                 <p><strong>Bedrooms:</strong> {property.bedrooms}</p>
                 <p><strong>Price:</strong> £{property.price.toLocaleString()}</p>
                 <p><strong>Location:</strong> {property.location}</p>
-                <p><strong>Description:</strong> {property.info}</p>
+                <p><strong>About:</strong> {property.info}</p>
 
-                {/* Tab navigation */}
-                <div className="tabs">
-                    <button
-                        className={activeTab === 'description' ? 'active' : ''}
-                        onClick={() => handleTabClick('description')}
-                    >
-                        Long Description
-                    </button>
-                    <button
-                        className={activeTab === 'floorplan' ? 'active' : ''}
-                        onClick={() => handleTabClick('floorplan')}
-                    >
-                        Floor Plan
-                    </button>
-                    <button
-                        className={activeTab === 'map' ? 'active' : ''}
-                        onClick={() => handleTabClick('map')}
-                    >
-                        View On Map
-                    </button>
-                </div>
+        {/* Tab Content */}
+            <Tabs>
+                <TabList>
+                <Tab>Description</Tab>
+                <Tab>Floor plan</Tab>
+                <Tab>View on map</Tab>
+                </TabList>
 
-                {/* Tab Content */}
-                <div className="tab-content">
-                    {activeTab === 'description' && (
-                        <div>
-                            <p>{property.description}</p>
-                        </div>
-                    )}
-                    {activeTab === 'floorplan' && (
-                        <div>
-                            <img 
+                <TabPanel>
+                <p>{property.description}</p>
+                </TabPanel>
+                <TabPanel>
+                <img 
                     src={property.floorplan} 
                     alt={`Property floor plan`} 
                     className="property-image" 
                 />
-                        </div>
-                    )}
-                    {activeTab === 'map' && (
-                        <div>
-                            <a href={property.map} target="_blank" rel="noopener noreferrer">
-                                View on Google Map
-                            </a>
-                        </div>
-                    )}
-                </div>
+                </TabPanel>
+                <TabPanel>
+                    <div>Test</div>
+                </TabPanel>
+            </Tabs>
+                
         </div>
         </div>
     );

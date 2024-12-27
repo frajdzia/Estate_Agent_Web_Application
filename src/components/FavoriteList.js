@@ -1,7 +1,7 @@
 import React from "react";
 import Card from './Card';
 
-const FavoriteList = ({ favorites, handleClearFavorites, handlePropertyClick, setFavorites }) => {
+const FavoriteList = ({ favorites, handleRemoveFromFavorites, handleClearFavorites, handlePropertyClick, setFavorites }) => {
     // Handle drop event to add or remove properties from favorites when dropped to fav block
     const handleDrop = (e) => {
         e.preventDefault();
@@ -15,7 +15,6 @@ const FavoriteList = ({ favorites, handleClearFavorites, handlePropertyClick, se
             
         updatedFavorites.push(property);
         setFavorites(updatedFavorites);
-    
     };
 
     const handleDragOver = (e) => {
@@ -37,6 +36,12 @@ const FavoriteList = ({ favorites, handleClearFavorites, handlePropertyClick, se
                         <Card property={favorite} 
                             handlePropertyClick={handlePropertyClick}  // Pass the function here
                         />
+                        <button
+                            onClick={() => {
+                                handleRemoveFromFavorites(favorite); // Remove from favorites if it's already there
+                            }}
+                            > Remove from favorites
+                        </button>
                         </div>
                     ))
                 ) : (

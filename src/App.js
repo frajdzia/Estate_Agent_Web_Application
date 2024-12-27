@@ -39,7 +39,6 @@ const App = () => {
             setFavorites(JSON.parse(savedFavorites));
         }
 
-        
         setFilteredProperties(getFilteredProperties());
     }, []);
 
@@ -149,6 +148,7 @@ const App = () => {
                     <FavoriteList 
                         favorites={favorites} 
                         handleClearFavorites={handleClearFavorites} 
+                        handleRemoveFromFavorites={handleRemoveFromFavorites}
                         setFavorites={setFavorites}
                         handlePropertyClick={handlePropertyClick}  // property click handler
                     />

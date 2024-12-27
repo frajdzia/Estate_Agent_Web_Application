@@ -22,7 +22,7 @@ const Card = ({property, handlePropertyClick}) => {
                     <p><strong>Location:</strong> {property.location}</p>
                     <p><strong>Added On:</strong> {formattedDate}</p>
                 </div>
-                <div className="card-mobile-visible">
+                <div className="card-favorite">
                     <p>{property.type} • {property.bedrooms} bedrooms • £{property.price.toLocaleString()} • {property.location}</p>
                 </div>
             </div>
