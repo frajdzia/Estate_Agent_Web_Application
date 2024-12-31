@@ -1,24 +1,47 @@
+
 body {
-  font-family: Arial, sans-serif;
+  font-family:'Gill Sans', Calibri, 'Trebuchet MS', sans-serif;
   margin: 0;
   padding: 0;
+  background-color:#fbfbfe;
+  color:#0e0e16;
 }
 
 h1 {
-  color: #02544d;
+  color: #5869d6;
   text-align: center;
 }
 
-form {
-  margin: 20px;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+.form-inputs-container{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  min-width: 100%;
+}
+
+.form-wrapper {
+  padding: 0 20px;
+}
+
+.form-wrapper button[type="submit"] {
+  margin-top: 20px;
+}
+
+.double-form-field-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.type-of-property{
+  width: 270px !important;
 }
 
 fieldset {
-  margin: 10px 0;
+  margin: 0;
   border: none;
+  -moz-box-align: center;
+  align-items: center;
 }
 
 input[type="text"],
@@ -31,7 +54,6 @@ input[type="text"] {
   width: 250px;
   line-height: 30px;
   padding-left: 10px;
-  font-size: 14px;
   padding-right: 10px;
   border-radius: 4px;
   outline: none;
@@ -39,26 +61,37 @@ input[type="text"] {
 }
 
 button {
+  margin-bottom: 10px;
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: #5869d6;
+  border-radius: 10px;
   color: white;
   border: none;
   cursor: pointer;
+  transition: background-color 0.3s; /* background transition */
+  transform: 0.3s;
+}
+
+button:hover{
+  background-color: #7485f0;
+  transform: scale(1.02);
 }
 
 .navbar {
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(3px);
 }
 
 .navbar h1 {
+  font-size: 46px;
   margin-top: 0;
-  padding: 10px;
+  padding: 15px;
 }
 
 .nav {
   width: 100%;
-  background-image: url(https://images.squarespace-cdn.com/content/v1/614b8a3ca23b0a1609d011b0/1633600657482-RD46JYBH5UB94DFT8GFI/lofthouseresidences_hero_innovation2.jpg);
-  background-position: center;
+  /* background-image: url(https://images.squarespace-cdn.com/content/v1/614b8a3ca23b0a1609d011b0/1633600657482-RD46JYBH5UB94DFT8GFI/lofthouseresidences_hero_innovation2.jpg); */
+  background-image: url("nav.gif");
+  background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -98,6 +131,9 @@ button {
 
 .form-inputs-container {
   max-width: 300px;
+  display:flex;
+  flex-direction: row;
+  overflow-x:inherit;
 }
 
 .favorite-list {
@@ -127,6 +163,13 @@ button {
   margin-bottom: 10px;
   cursor: pointer;
   overflow: hidden;
+  transition: all 0.1s ease-in-out;
+}
+
+.card:hover{
+  background-color: #e0eaf7;
+  transition: all 0.1s ease-in-out;
+  transform: scale(1.02);
 }
 
 .card img.property-cover {
@@ -141,7 +184,7 @@ button {
 }
 
 .card-favorite {
-  visibility: hidden;
+  display: none;
 }
 
 /* Mobile-specific styles */
@@ -185,13 +228,14 @@ button {
   .card:hover .card-body,
   .card-favorite {
     opacity: 1;
+    display:block;
   }
 
   .card-larger {
-    opacity: 0;
+    display: none;
   }
 
-  .card-body h3 {
+  .card-body h3, .card-favorite {
     justify-content: center;
     text-align: center;
   }
@@ -290,5 +334,32 @@ button {
 
 .additional-image.selected { /* selected thumbnail */
   opacity: 1;
-  border: 2px solid #00ff4c;
+  border: 2px solid #009dff;
+}
+
+/* FOOTER */
+footer {
+  bottom: 0;
+  left: 0;
+  padding:5px 0;
+  width: 100%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+footer > svg {
+  fill: #4164c3;
+  padding: 0 5px;
+}
+
+footer > a{
+  text-decoration: none;
+  font-weight: 500;
+}
+
+footer a:hover {
+  color: #041a55;
+  border-radius: 5px;
 }
