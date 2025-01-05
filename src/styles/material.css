@@ -1,0 +1,18 @@
+.material-text-field input {
+  justify-content: center;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: unset !important;
+  outline: none !important;
+  background-color: #fff;
+  border: unset !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border: unset !important;
+  box-shadow: 0 0 2px 3px rgba(0, 123, 255, 0.39), inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  outline: none !important;
+  color: #f00 !important;
+  transition: box-shadow 0.15s ease-in-out;
+}

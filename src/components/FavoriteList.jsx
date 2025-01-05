@@ -5,7 +5,9 @@ const FavoriteList = ({ favorites, handleRemoveFromFavorites, handleClearFavorit
     // Handle drop event to add or remove properties from favorites when dropped to fav block
     const handleDrop = (e) => {
         e.preventDefault();
-        const property = JSON.parse(e.dataTransfer.getData('property')); 
+        const data = e.dataTransfer.getData('property');
+        if (!data) return;
+        const property = JSON.parse(data); 
         const updatedFavorites = [...favorites];
         const isAlreadyFavorite = !!updatedFavorites.find(item => item.id === property.id);
         
@@ -27,9 +29,8 @@ const FavoriteList = ({ favorites, handleRemoveFromFavorites, handleClearFavorit
 
     return (
         <div className="favorite-list" onDrop={handleDrop} onDragOver={handleDragOver}>
-            <h2>Favorite Properties
-                <button onClick={() => handleClearFavorites([])}>Erase Favorite List</button>
-            </h2>
+            <h2>Favorite Properties</h2>
+            <button onClick={() => handleClearFavorites([])}>Erase Favorite List</button>
             <div className = "card-container-right">
                 {favorites.length > 0 ? (
                     favorites.map((favorite) => (<div key={favorite.id} className = "drag-handle" draggable onDragStart={(e) => handleDragStart(e, favorite)}>

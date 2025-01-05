@@ -8,7 +8,6 @@ const PropertyList = ({properties, handleAddToFavorites, handleRemoveFromFavorit
     };
     
     return(
-        <>
         <div className='card-container'>
             {properties.map((property)=>{
                 const isFavorite = favorites.some((favorite) => favorite.id === property.id);
@@ -22,9 +21,9 @@ const PropertyList = ({properties, handleAddToFavorites, handleRemoveFromFavorit
                         <button
                             onClick={() => {
                                 if (isFavorite) {
-                                handleRemoveFromFavorites(property); // Remove from favorites if it's already there
+                                handleRemoveFromFavorites(property); // Remove from favorites if it is already there
                                 } else {
-                                handleAddToFavorites(property); // Add to favorites if it's not there
+                                handleAddToFavorites(property); // Add to favorites if it is not yet
                                 }
                             }}
                             >
@@ -34,7 +33,6 @@ const PropertyList = ({properties, handleAddToFavorites, handleRemoveFromFavorit
                 );
             })}
         </div>
-        </>
     );
 };
 

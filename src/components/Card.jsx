@@ -1,5 +1,4 @@
 import React from "react";
-
 const Card = ({property, handlePropertyClick}) => {
 
     // Format the date into a readable format

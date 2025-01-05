@@ -1,10 +1,20 @@
+@import "./styles/cards.css";
+@import "./styles/forms.css";
+@import "./styles/material.css";
+@import "./styles/modal.css";
+@import "./styles/navbar.css";
+@import "./styles/responsiveness.css";
+
+html {
+  overflow-x: hidden;
+}
 
 body {
-  font-family:'Gill Sans', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Gill Sans', Calibri, 'Trebuchet MS', sans-serif;
   margin: 0;
   padding: 0;
-  background-color:#fbfbfe;
-  color:#0e0e16;
+  background-color: #fbfbfe;
+  color: #0e0e16;
 }
 
 h1 {
@@ -12,30 +22,6 @@ h1 {
   text-align: center;
 }
 
-.form-inputs-container{
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  min-width: 100%;
-}
-
-.form-wrapper {
-  padding: 0 20px;
-}
-
-.form-wrapper button[type="submit"] {
-  margin-top: 20px;
-}
-
-.double-form-field-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.type-of-property{
-  width: 270px !important;
-}
 
 fieldset {
   margin: 0;
@@ -68,59 +54,28 @@ button {
   color: white;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s; /* background transition */
+  transition: background-color 0.3s;
+  /* background transition */
   transform: 0.3s;
 }
 
-button:hover{
+button:hover {
   background-color: #7485f0;
   transform: scale(1.02);
 }
 
-.navbar {
-  backdrop-filter: blur(3px);
-}
-
-.navbar h1 {
-  font-size: 46px;
-  margin-top: 0;
-  padding: 15px;
-}
-
-.nav {
-  width: 100%;
-  /* background-image: url(https://images.squarespace-cdn.com/content/v1/614b8a3ca23b0a1609d011b0/1633600657482-RD46JYBH5UB94DFT8GFI/lofthouseresidences_hero_innovation2.jpg); */
-  background-image: url("nav.gif");
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.searchbar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.searchbar input {
-  justify-content: center;
-  padding: 10px;
-  margin: 30px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
+/* MAIN SECTION */
 
 .main-container {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
   box-sizing: border-box;
 }
 
 .left-section {
   width: fit-content;
-  padding-right: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .right-section {
@@ -129,22 +84,22 @@ button:hover{
   border-left: 1px solid #ddd;
 }
 
-.form-inputs-container {
-  max-width: 300px;
-  display:flex;
-  flex-direction: row;
-  overflow-x:inherit;
-}
-
 .favorite-list {
   height: 100%;
 }
 
-.card-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.card-container,
+.additional-images {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 20px;
   align-items: center;
+}
+
+.additional-images {
+  margin-top: 15px;
+  gap: 5px;
 }
 
 .card-container-favorites {
@@ -154,207 +109,30 @@ button:hover{
   align-items: center;
 }
 
-.card {
-  border: 1px solid #ddd;
-  padding: 10px;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  margin-bottom: 10px;
-  cursor: pointer;
-  overflow: hidden;
-  transition: all 0.1s ease-in-out;
+.properties-header {
+  margin-left: 20px;
 }
 
-.card:hover{
-  background-color: #e0eaf7;
-  transition: all 0.1s ease-in-out;
-  transform: scale(1.02);
-}
-
-.card img.property-cover {
-  width: 100%;
-  max-height: 300px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.card-body {
-  margin-top: 10px;
-}
-
-.card-favorite {
-  display: none;
-}
-
-/* Mobile-specific styles */
-
-@media (max-width: 768px) {
-  .main-container {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .left-section,
-  .right-section {
-    width: 100%;
-    padding: 10px;
-  }
-
-  .searchbar-container input {
-    width: 80%;
-  }
-}
-
-.right-section {
-  .card-body {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.7); /* background with opacity */
-    color: white;
-    opacity: 0; /* initially hidden property details */
-    transition: opacity 0.3s ease-in-out; /* smooth transition */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);  
-  }
-
-  .card {
-    position: relative;
-    padding: 0;
-    border: 1px solid #acacac;
-  }
-
-  .card:hover .card-body,
-  .card-favorite {
-    opacity: 1;
-    display:block;
-  }
-
-  .card-larger {
-    display: none;
-  }
-
-  .card-body h3, .card-favorite {
-    justify-content: center;
-    text-align: center;
-  }
-}
-
-/* MODAL styles */
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  position: relative;
-  width: 80%;
-  max-width: 800px;
-  max-height: 90vh;
-  overflow: auto;
-  border-radius: 10px;
-}
-
-#modal-header {
-  text-align: center;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 5px 10px;
-  background-color: #650000;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.image-slider {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.property-image {
-  max-width: 100%;
-  max-height: 400px;
-  object-fit: contain;
-}
-
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 10px;
-}
-
-.prev {
-  left: 10px;
-}
-
-.next {
-  right: 10px;
-}
-
-.additional-images {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-  overflow-x: auto;
-}
-
-.additional-image {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  cursor: pointer;
-  margin-right: 10px;
-  opacity: 0.7;
-  transition: opacity 0.3s;
-}
-
-.additional-image.selected { /* selected thumbnail */
-  opacity: 1;
-  border: 2px solid #009dff;
-}
+/* End of MAIN SECTION */
 
 /* FOOTER */
 footer {
   bottom: 0;
   left: 0;
-  padding:5px 0;
+  padding: 5px 0;
   width: 100%;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
 }
 
-footer > svg {
+footer>svg {
   fill: #4164c3;
   padding: 0 5px;
 }
 
-footer > a{
+footer>a {
   text-decoration: none;
   font-weight: 500;
 }

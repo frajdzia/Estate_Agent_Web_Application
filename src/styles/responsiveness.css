@@ -1,0 +1,58 @@
+@media (max-width: 1180px) {
+
+    .left-section,
+    .right-section {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .additional-image {
+        width: 70px;
+        height: 70px;
+    }
+
+    .right-section {
+        border-left: none;
+    }
+
+    .main-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .searchbar-container input {
+        width: 80%;
+    }
+
+}
+
+@media (max-width: 550px) {
+    .card {
+        max-width: 400px;
+        margin-right: none;
+    }
+
+    .right-section {
+        .card {
+            max-width: 500px !important;
+        }
+    }
+
+    .left-section {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 250px) {
+    .card {
+        max-width: 300px;
+        min-width: 200px;
+    }
+
+    .right-section {
+        .card {
+            max-width: 400px !important;
+            min-width: 200px !important;
+        }
+    }
+}

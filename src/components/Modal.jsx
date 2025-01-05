@@ -8,6 +8,13 @@ const Modal = ({ property, handleCloseModal }) => {
   //track current tab
   const [activeTab, setActiveTab] = useState("description");
 
+  const addedDate = new Date(property.added); // Convert the ISO date string into a Date object
+  const formattedDate = addedDate.toLocaleDateString('en-GB', { // You can change 'en-GB' to any locale you prefer
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+});
+
   // Function to go to next image
   const nextImage = () => {
     if (currentImageIndex < property.images.length - 1) {
@@ -91,6 +98,9 @@ const Modal = ({ property, handleCloseModal }) => {
         <p>
           <strong>About:</strong> {property.info}
         </p>
+        <p>
+          <strong>Added on:</strong> {formattedDate}
+        </p>
 
         {/* Tab Content */}
         <Tabs>
@@ -111,13 +121,13 @@ const Modal = ({ property, handleCloseModal }) => {
             />
           </TabPanel>
           <TabPanel>
-            <iframe
+            <iframe className="property-map"
               src={property.map}
               width="600"
               height="450"
-              allowfullscreen=""
+              allowFullScreen=""
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
+              referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </TabPanel>
         </Tabs>

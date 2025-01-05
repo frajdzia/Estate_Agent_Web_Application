@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DatePicker from "react-widgets/DatePicker";
 import NumberPicker from "react-widgets/NumberPicker";
 import DropdownList from "react-widgets/DropdownList";
+import { TextField } from "@mui/material";
 
 function PropertySearchForm({ onSearch }) {
   const [postcode, setPostcode] = useState("");
@@ -29,32 +30,33 @@ function PropertySearchForm({ onSearch }) {
 
   return (
     <div className="form-wrapper">
-    <h3>Find Property By:</h3>
-    <form onSubmit={handleSubmit} className="form-inputs-container">
+      <h3>Find Property By:</h3>
+      <form onSubmit={handleSubmit}>
+        <div className="form-inputs-container">
         <div>
-        <div>
-          <div>Postcode:</div>
-          <fieldset>
-            <input
-              type="text"
-              placeholder="Enter the postcode"
-              value={postcode}
-              onChange={(e) => setPostcode(e.target.value)}
-            />
-          </fieldset>
-        </div>
-        <div>
-          <div>Type of Property:</div>
-          <fieldset>
-            <DropdownList
-              className="type-of-property"
-              defaultValue="Any"
-              data={["House", "Flat", "Any"]}
-              value={propertyType}
-              onChange={(e) => setPropertyType(e === "Any" ? "" : e)}
-            />
-          </fieldset>
-        </div>
+          <div>
+            <div>Postcode:</div>
+            <fieldset>
+              <TextField
+              className="material-text-field "
+                placeholder="Enter the postcode"
+                value={postcode}
+                onChange={(e) => setPostcode(e.target.value)}
+              />
+            </fieldset>
+          </div>
+          <div>
+            <div>Type of Property:</div>
+            <fieldset>
+              <DropdownList
+                className="type-of-property"
+                defaultValue="Any"
+                data={["House", "Flat", "Any"]}
+                value={propertyType}
+                onChange={(e) => setPropertyType(e === "Any" ? "" : e)}
+              />
+            </fieldset>
+          </div>
         </div>
         <div>
           <div>Bedrooms:</div>
@@ -104,8 +106,10 @@ function PropertySearchForm({ onSearch }) {
             />
           </fieldset>
         </div>
-    </form>
-    <button type="submit">Search</button></div>
+        </div>
+        <button type="submit">Search</button>
+      </form>
+    </div>
   );
 }
 
